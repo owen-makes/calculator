@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        .calc-container{
+            display: flex;
+            min-height: 95vh;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #1e3f20;
+            flex-direction: column;
+        }
+        .yet-another-container{
+            background-color: #1A1F16;
+            border: 10px solid #1A1F16;
+            border-radius: 10px;
+        }
+        .display{
+            height: 100px;
+            width: 380px;
+            border: 2px solid #4A7856;
+            color: ghostwhite;
+            font-size: 40px;
+            align-items: center;
+            justify-content: right;
+            display: flex;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .keypad{
+            display: grid;
+            grid-template-columns: 100px 100px 100px 100px;
+        }
+
+        .keypad > button{
+            font-size: 20px;
+            font-weight: bolder;
+            color: #4A7856 ;
+            background-color: #1E3F20;
+            border: 1px solid #4A7856;
+            border-radius: 5px;
+            padding: 5px;
+            height: 60px;
+        }
+        #clearBtn{
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
+        #num0{
+           grid-column-start: 1;
+           grid-column-end: 3; 
+        }
+
+        #equalsBtn{
+            background-color: #94ECBE;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="calc-container">
+        <div class="yet-another-container">
+            <div class="display"></div>
+            <div class="keypad">
+                <button id="clearBtn">Clear</button>
+                <button id="buttonideBtn">/</button>
+                <button id="num7">7</button>
+                <button id="num8">8</button>
+                <button id="num9">9</button>
+                <button id="multiplyBtn">x</button>
+                <button id="num4">4</button>
+                <button id="num5">5</button>
+                <button id="num6">6</button>
+                <button id="addBtn">+</button>
+                <button id="num1">1</button>
+                <button id="num2">2</button>
+                <button id="num3">3</button>
+                <button id="subtractBtn">-</button>
+                <button id="num0">0</button>
+                <button id="decimalBtn">.</button>
+                <button id="equalsBtn">=</button>            
+            </div>
+        </div>
+    </div>
+    <script>
+        function calculate(a,b,operator){
+            switch (operator){
+                case "+":
+                    return a + b
+                    break
+                case "-":
+                    return a - b
+                    break
+                case "*":
+                    return a * b
+                    break
+                case "/":
+                    return a / b
+                    break
+            }
+        }
+        let firstNum
+        let secondNum
+        let operation
+        
+        // JavaScript variables for each ID
+        const display = document.querySelector('.display')
+        const clearBtn = document.querySelector("#clearBtn");
+        const divideBtn = document.querySelector("#divideBtn");
+        const num7 = document.querySelector("#num7");
+        const num8 = document.querySelector("#num8");
+        const num9 = document.querySelector("#num9");
+        const multiplyBtn = document.querySelector("#multiplyBtn");
+        const num4 = document.querySelector("#num4");
+        const num5 = document.querySelector("#num5");
+        const num6 = document.querySelector("#num6");
+        const addBtn = document.querySelector("#addBtn");
+        const num1 = document.querySelector("#num1");
+        const num2 = document.querySelector("#num2");
+        const num3 = document.querySelector("#num3");
+        const subtractBtn = document.querySelector("#subtractBtn");
+        const num0 = document.querySelector("#num0");
+        const decimalBtn = document.querySelector("#decimalBtn");
+        const equalsBtn = document.querySelector("#equalsBtn");
+        
+        //Create arrays for ease of access
+        const opArr = [divideBtn,multiplyBtn,addBtn,subtractBtn]
+        const numArray = [num1,num2,num3,num4,num5,num6,num7,num8,num9]
+        //Add event listeners to numbers
+        numArray.forEach(function(element){
+            element.addEventListener('click',function(){
+                display.textContent += element.textContent})
+        })
+        opArr.forEach(function(item){
+            item.addEventListener('click',function(){
+            firstNum = display.textContent
+            display.textContent = ""
+            operation = operator.textContent    
+            })
+        })
+
+        clearBtn.addEventListener("click", function(){
+            secondNum = display.textContent
+            display.textContent = calculate(firstNum,secondNum,operation)
+        })
+
+    </script>
+</body>
+</html>
