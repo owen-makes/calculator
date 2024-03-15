@@ -146,6 +146,11 @@
         function calculate(a,b,operator){
             a = +a
             b = +b
+            if (b===0 && operator == "/"){
+                alert("IMPOSSIBLE (╯°□°)╯︵ ɹoɹɹƎ")
+                display.textContent = ""
+                operation = undefined
+            } else {
             switch (operator){
                 case "+":
                     return a + b
@@ -159,7 +164,7 @@
                 case "/":
                     return a / b
                     break
-            }
+            }}
         }
         //Declare empty variables to store results
         let firstNum
