@@ -15,7 +15,10 @@
         height: 50px; /* Adjust button height for smaller screens */
         }
         }
-        
+        @font-face{
+            font-family: dsdigital;
+            src: url(/calculator/DS-DIGI.TTF);
+        }/*Custom font for display*/
         .calc-container{
             display: flex;
             min-height: 50vh;
@@ -41,14 +44,15 @@
             width: 90vw; /* Adjust width for responsiveness */
             max-width: 400px; /* Max width */
             border: 2px solid #4A7856;
-            color: ghostwhite;
-            font-size: 40px;
+            color: #94ECBE;
+            font-size: 80px;
             align-items: center;
             justify-content: right;
             display: flex;
             padding: 10px;
             border-radius: 30px;
             margin-bottom: 15px;
+            font-family: dsdigital;
         }
 
         .keypad{
@@ -260,6 +264,7 @@
             display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
             firstNum = display.textContent
             operandClicked = 0
+            numberClicked = 0
             operation = undefined
         })
 
