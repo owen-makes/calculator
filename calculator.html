@@ -49,6 +49,12 @@
             padding: 5px;
             height: 60px;
         }
+
+        button[id$='Btn'] {
+            background-color: #4A7856;
+            color: #1A1F16;
+            border: 1px solid #94ECBE;
+        }
         #clearBtn{
             grid-column-start: 1;
             grid-column-end: 4;
@@ -71,7 +77,7 @@
             <div class="display"></div>
             <div class="keypad">
                 <button id="clearBtn">Clear</button>
-                <button id="buttonideBtn">/</button>
+                <button id="divideBtn">/</button>
                 <button id="num7">7</button>
                 <button id="num8">8</button>
                 <button id="num9">9</button>
@@ -85,13 +91,15 @@
                 <button id="num3">3</button>
                 <button id="subtractBtn">-</button>
                 <button id="num0">0</button>
-                <button id="decimalBtn">.</button>
+                <button id="Decimal">.</button>
                 <button id="equalsBtn">=</button>            
             </div>
         </div>
     </div>
     <script>
         function calculate(a,b,operator){
+            a = +a
+            b = +b
             switch (operator){
                 case "+":
                     return a + b
@@ -107,6 +115,7 @@
                     break
             }
         }
+        //Declare empty variables to store results
         let firstNum
         let secondNum
         let operation
@@ -115,43 +124,56 @@
         const display = document.querySelector('.display')
         const clearBtn = document.querySelector("#clearBtn");
         const divideBtn = document.querySelector("#divideBtn");
-        const num7 = document.querySelector("#num7");
-        const num8 = document.querySelector("#num8");
-        const num9 = document.querySelector("#num9");
         const multiplyBtn = document.querySelector("#multiplyBtn");
-        const num4 = document.querySelector("#num4");
-        const num5 = document.querySelector("#num5");
-        const num6 = document.querySelector("#num6");
         const addBtn = document.querySelector("#addBtn");
-        const num1 = document.querySelector("#num1");
-        const num2 = document.querySelector("#num2");
-        const num3 = document.querySelector("#num3");
         const subtractBtn = document.querySelector("#subtractBtn");
-        const num0 = document.querySelector("#num0");
-        const decimalBtn = document.querySelector("#decimalBtn");
+        const decimalBtn = document.querySelector("#Decimal");
         const equalsBtn = document.querySelector("#equalsBtn");
+        const numsArray = document.querySelectorAll("[id^='num']")
         
-        //Create arrays for ease of access
-        const opArr = [divideBtn,multiplyBtn,addBtn,subtractBtn]
-        const numArray = [num1,num2,num3,num4,num5,num6,num7,num8,num9]
         //Add event listeners to numbers
-        numArray.forEach(function(element){
+        numsArray.forEach(function(element){
             element.addEventListener('click',function(){
                 display.textContent += element.textContent})
         })
-        opArr.forEach(function(item){
-            item.addEventListener('click',function(){
-            firstNum = display.textContent
-            display.textContent = ""
-            operation = operator.textContent    
-            })
+
+        decimalBtn.addEventListener('click',()=>{
+            if (!display.textContent.includes(".")){
+                display.textContent += "."
+            }
         })
 
-        clearBtn.addEventListener("click", function(){
+        //Add event listeners to operators
+        divideBtn.addEventListener('click',function(){
+            firstNum = display.textContent
+            operation = "/"    
+            })
+
+        addBtn.addEventListener('click',() => {
+            firstNum = display.textContent
+            operation = "+"
+
+            })
+        multiplyBtn.addEventListener('click',() =>{
+            firstNum = display.textContent
+            operation = "*"
+        })
+        subtractBtn.addEventListener('click',()=>{
+            firstNum = display.textContent
+            operation = "-"
+        })
+            
+
+
+        equalsBtn.addEventListener("click", function(){
             secondNum = display.textContent
             display.textContent = calculate(firstNum,secondNum,operation)
         })
 
+        //
+        clearBtn.addEventListener("click", () =>{
+            display.textContent = ""
+        })
     </script>
 </body>
 </html>
