@@ -20,6 +20,8 @@
             background-color: #1A1F16;
             border: 10px solid #1A1F16;
             border-radius: 10px;
+            display: flex;
+            flex-direction: column;
         }
         .display{
             height: 100px;
@@ -67,11 +69,25 @@
         #equalsBtn{
             background-color: #94ECBE;
         }
+        h1{
+            background-color: #1e3f20;
+            color:#94ECBE;
+            justify-content: flex-start;
+            align-items: stretch;
+            padding-right: 20px;            
+        }
+        body{
+            background-color: #1e3f20;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;            
+        }
         
 
     </style>
 </head>
 <body>
+    <h1>Calculowen</h1>
     <div class="calc-container">
         <div class="yet-another-container">
             <div class="display"></div>
@@ -162,6 +178,7 @@
                 firstNum = display.textContent
                 secondNum = 0
                 numberClicked = 0
+                operandClicked = 1
             } else {
                 operandClicked = 1
                 numberClicked = 0
@@ -194,6 +211,7 @@
                 firstNum = display.textContent
                 secondNum = 0
                 numberClicked = 0
+                operandClicked = 1
             } else {
                 operandClicked = 1
                 numberClicked = 0
@@ -209,6 +227,7 @@
                 firstNum = display.textContent
                 secondNum = 0
                 numberClicked = 0
+                operandClicked = 1
             } else {
                 operandClicked = 1
                 numberClicked = 0
