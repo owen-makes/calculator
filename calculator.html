@@ -120,6 +120,7 @@
         let secondNum
         let operation
         let operandClicked = 0
+        let numberClicked = 0
         
         // JavaScript variables for each ID
         const display = document.querySelector('.display')
@@ -135,14 +136,16 @@
         //Add event listeners to numbers
         numsArray.forEach(function(element){
             element.addEventListener('click',function(){
-                if (operandClicked){
-                    display.textContent=""
-                    operandClicked = 0
-                }
+                if ((operandClicked && !numberClicked) || (!operandClicked && !numberClicked)){
+                 display.textContent = ""
+                } 
                 display.textContent += element.textContent
-                
+                numberClicked = 1
+                operandClicked = 0
             })
-        })
+            })
+        
+
 
         decimalBtn.addEventListener('click',()=>{
             if (!display.textContent.includes(".")){
@@ -152,36 +155,95 @@
 
         //Add event listeners to operators
         divideBtn.addEventListener('click',function(){
-            firstNum = display.textContent
-            operation = "/"
-            operandClicked = 1    
+            if (operation !== undefined && numberClicked == 1){
+                console.log("true")
+                secondNum = display.textContent
+                display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
+                firstNum = display.textContent
+                secondNum = 0
+                numberClicked = 0
+            } else {
+                operandClicked = 1
+                numberClicked = 0
+                firstNum = display.textContent
+                operation = "/"
+            }
             })
 
         addBtn.addEventListener('click',() => {
-            firstNum = display.textContent
-            operation = "+"
-            operandClicked = 1
-            })
+            if (operation !== undefined && numberClicked == 1){
+                console.log("true")
+                secondNum = display.textContent
+                display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
+                firstNum = display.textContent
+                secondNum = 0
+                numberClicked = 0
+                operandClicked = 1
+            } else {
+                operandClicked = 1
+                numberClicked = 0
+                firstNum = display.textContent
+                operation = "+"
+            }
+        })
         multiplyBtn.addEventListener('click',() =>{
-            firstNum = display.textContent
-            operation = "*"
-            operandClicked = 1
+            if (operation !== undefined && numberClicked == 1){
+                console.log("true")
+                secondNum = display.textContent
+                display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
+                firstNum = display.textContent
+                secondNum = 0
+                numberClicked = 0
+            } else {
+                operandClicked = 1
+                numberClicked = 0
+                firstNum = display.textContent
+                operation = "*"
+            }
         })
         subtractBtn.addEventListener('click',()=>{
-            firstNum = display.textContent
-            operation = "-"
-            operandClicked = 1
+            if (operation !== undefined && numberClicked == 1){
+                console.log("true")
+                secondNum = display.textContent
+                display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
+                firstNum = display.textContent
+                secondNum = 0
+                numberClicked = 0
+            } else {
+                operandClicked = 1
+                numberClicked = 0
+                firstNum = display.textContent
+                operation = "-"
+            }
         })
         
         equalsBtn.addEventListener("click", function(){
             secondNum = display.textContent
             display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
+            firstNum = display.textContent
             operandClicked = 0
+            operation = undefined
         })
 
-        //
+        //Clear and clear all
+        let clearAll
+
         clearBtn.addEventListener("click", () =>{
-            display.textContent = ""
+            if (clearAll === 1){
+                firstNum = 0
+                secondNum = 0
+                operation = 0
+                numberClicked = 0
+                operandClicked = 0
+                display.textContent = ""
+                clearBtn.innerText = "Clear"
+                clearAll = 0    
+            } else {
+                display.textContent = ""
+                clearAll = 1
+                clearBtn.innerText = "Clear All"
+            }
+
         })
     </script>
 </body>
