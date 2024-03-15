@@ -119,6 +119,7 @@
         let firstNum
         let secondNum
         let operation
+        let operandClicked = 0
         
         // JavaScript variables for each ID
         const display = document.querySelector('.display')
@@ -134,7 +135,13 @@
         //Add event listeners to numbers
         numsArray.forEach(function(element){
             element.addEventListener('click',function(){
-                display.textContent += element.textContent})
+                if (operandClicked){
+                    display.textContent=""
+                    operandClicked = 0
+                }
+                display.textContent += element.textContent
+                
+            })
         })
 
         decimalBtn.addEventListener('click',()=>{
@@ -146,28 +153,30 @@
         //Add event listeners to operators
         divideBtn.addEventListener('click',function(){
             firstNum = display.textContent
-            operation = "/"    
+            operation = "/"
+            operandClicked = 1    
             })
 
         addBtn.addEventListener('click',() => {
             firstNum = display.textContent
             operation = "+"
-
+            operandClicked = 1
             })
         multiplyBtn.addEventListener('click',() =>{
             firstNum = display.textContent
             operation = "*"
+            operandClicked = 1
         })
         subtractBtn.addEventListener('click',()=>{
             firstNum = display.textContent
             operation = "-"
+            operandClicked = 1
         })
-            
-
-
+        
         equalsBtn.addEventListener("click", function(){
             secondNum = display.textContent
-            display.textContent = calculate(firstNum,secondNum,operation)
+            display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
+            operandClicked = 0
         })
 
         //
