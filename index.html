@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <style>
+        @media screen and (max-width: 768px) {
+        .display {
+        font-size: 30px; /* Adjust font size for smaller screens */
+        }
+
+        .keypad > button {
+        font-size: 16px; /* Adjust font size for smaller screens */
+        height: 50px; /* Adjust button height for smaller screens */
+        }
+        }
+        
         .calc-container{
             display: flex;
-            min-height: 95vh;
+            min-height: 50vh;
             justify-content: center;
             align-content: center;
             align-items: center;
@@ -19,13 +30,16 @@
         .yet-another-container{
             background-color: #1A1F16;
             border: 10px solid #1A1F16;
-            border-radius: 10px;
+            border-radius: 30px;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            padding: 15px 1px;
         }
-        .display{
+        .display {
             height: 100px;
-            width: 380px;
+            width: 90vw; /* Adjust width for responsiveness */
+            max-width: 400px; /* Max width */
             border: 2px solid #4A7856;
             color: ghostwhite;
             font-size: 40px;
@@ -33,12 +47,17 @@
             justify-content: right;
             display: flex;
             padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 10px;
+            border-radius: 30px;
+            margin-bottom: 15px;
         }
+
         .keypad{
             display: grid;
-            grid-template-columns: 100px 100px 100px 100px;
+            grid-template-columns: repeat(4, minmax(80px, 1fr));
+            row-gap: 15px;
+            column-gap: 5px;
+            width: 90vw;
+            max-width: 400px;
         }
 
         .keypad > button{
@@ -47,7 +66,7 @@
             color: #4A7856 ;
             background-color: #1E3F20;
             border: 1px solid #4A7856;
-            border-radius: 5px;
+            border-radius:50px;
             padding: 5px;
             height: 60px;
         }
@@ -172,13 +191,13 @@
         //Add event listeners to operators
         divideBtn.addEventListener('click',function(){
             if (operation !== undefined && numberClicked == 1){
-                console.log("true")
                 secondNum = display.textContent
                 display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
                 firstNum = display.textContent
                 secondNum = 0
                 numberClicked = 0
                 operandClicked = 1
+                operation = "/"
             } else {
                 operandClicked = 1
                 numberClicked = 0
@@ -189,13 +208,13 @@
 
         addBtn.addEventListener('click',() => {
             if (operation !== undefined && numberClicked == 1){
-                console.log("true")
                 secondNum = display.textContent
                 display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
                 firstNum = display.textContent
                 secondNum = 0
                 numberClicked = 0
                 operandClicked = 1
+                operation = "+"
             } else {
                 operandClicked = 1
                 numberClicked = 0
@@ -205,13 +224,13 @@
         })
         multiplyBtn.addEventListener('click',() =>{
             if (operation !== undefined && numberClicked == 1){
-                console.log("true")
                 secondNum = display.textContent
                 display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
                 firstNum = display.textContent
                 secondNum = 0
                 numberClicked = 0
                 operandClicked = 1
+                operation = "*"
             } else {
                 operandClicked = 1
                 numberClicked = 0
@@ -221,13 +240,13 @@
         })
         subtractBtn.addEventListener('click',()=>{
             if (operation !== undefined && numberClicked == 1){
-                console.log("true")
                 secondNum = display.textContent
                 display.textContent = parseFloat(calculate(firstNum,secondNum,operation).toFixed(4))
                 firstNum = display.textContent
                 secondNum = 0
                 numberClicked = 0
                 operandClicked = 1
+                operation = "-"
             } else {
                 operandClicked = 1
                 numberClicked = 0
